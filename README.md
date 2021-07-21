@@ -41,5 +41,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Reference
 https://github.com/flatlogic/light-blue-react-template  
 https://github.com/flatlogic/react-dashboard  
-https://github.com/cruip/open-react-template
-https://github.com/the-road-to-react-with-firebase/react-firebase-authentication
+https://github.com/cruip/open-react-template  
+https://github.com/the-road-to-react-with-firebase/react-firebase-authentication  
