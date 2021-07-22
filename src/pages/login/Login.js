@@ -3,7 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 class Login extends React.Component {
+    static isAuthenticated(token) {
+        if(token) return true;
+    }
 
+    render() {
+        return(
+            <div>Login</div>
+        )
+    }
 }
 
 function mapStateToProps(state){
