@@ -28,6 +28,7 @@ class App extends React.PureComponent {
                     <Route path="/review" component={LayoutComponent}/>
                     <Route path="/login" component={LayoutComponent}/>
                     <Route path="/register" component={LayoutComponent}/>
+                    <Route path="/detail/:ct/:lc/:cd" component={LayoutComponent}/>
                     <PrivateRoute path="/mypage" dispatch={this.props.dispatch} component={LayoutComponent}/>
                     {/* <Route path="/mypage" component={LayoutComponent}/> */}
                 </Switch> 
