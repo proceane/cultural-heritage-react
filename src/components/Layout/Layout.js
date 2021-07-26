@@ -15,6 +15,8 @@ import UserInfo from '../../pages/mypage/userinfo'
 import Comments from '../../pages/mypage/comments'
 import Like from '../../pages/mypage/like'
 
+import Detail from '../../pages/detail'
+
 class Layout extends React.Component {
     render() {
         return(
@@ -29,6 +31,7 @@ class Layout extends React.Component {
                     <Route path="/mypage" exact component={UserInfo}/>
                     <Route path="/mypage/comments" component={Comments}/>
                     <Route path="/mypage/like" component={Like}/>
+                    <Route path="/detail/:ct/:lc/:cd" component={Detail}/>
                 </Switch>
                 <Footer/>
             </div>
