@@ -7,6 +7,8 @@ import LayoutComponent from '../components/Layout';
 import Login from '../pages/login'
 import { logoutUser } from '../actions/user';
 
+import ErrorPage from '../pages/error/ErrorPage';
+
 const PrivateRoute = ({dispatch, component, ...rest}) => {
     if(!Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))) {
         dispatch(logoutUser());
@@ -31,6 +33,7 @@ class App extends React.PureComponent {
                     <Route path="/detail/:ct/:lc/:cd" component={LayoutComponent}/>
                     <PrivateRoute path="/mypage" dispatch={this.props.dispatch} component={LayoutComponent}/>
                     {/* <Route path="/mypage" component={LayoutComponent}/> */}
+                    <Route component={ErrorPage}/>
                 </Switch> 
             </BrowserRouter>
         )
