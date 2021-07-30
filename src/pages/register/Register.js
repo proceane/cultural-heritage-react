@@ -1,8 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { registerUser } from '../../actions/register'
 
 class Register extends React.Component {
+    doRegister(e) {
+        e.preventDefault();
+        if(!this.isPasswordValid()){
+            this.checkPassword();
+        } else {
+            this.props.dispatch(registerUser({
+                creds: {
+                    email: this.state.email,
+                    password: this.state.password
+                },
+                history: this.props.history
+            }))
+        }
+    }
+
     render() {
         return(
             <div class="wrapper row3">
