@@ -2,9 +2,43 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { loginUser } from '../../actions/user'
+
 class Login extends React.Component {
     static isAuthenticated(token) {
         if(token) return true;
+    }
+
+    constructor() {
+        super(props);
+
+        this.state = {
+            email: "",
+            password: ""
+        };
+
+        this.doLogin = this.doLogin.bind(this);
+        this.changeEmail = this.changeEmail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
+        this.signUp = this.signUp.bind(this);
+
+    }
+
+    changeEmail(event) {
+        this.setState({email : event.target.value});
+    }
+
+    changePassword(event) {
+        this.setState({password: event.target.value});
+    }
+
+    doLogin(e) {
+        e.preventDefault();
+        this.props.dispatch(loginUser({email: this.state.email, password: this.state.password}));
+    }
+
+    signUp() {
+        this.props.history.push("/register");
     }
 
     render() {
