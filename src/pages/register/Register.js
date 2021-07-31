@@ -1,8 +1,67 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { registerError, registerUser } from '../../actions/register'
 
 class Register extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            email = "",
+            password = "",
+            confirmPassword = ""
+        };
+
+        this.doRegister = this.doRegister.bind(this);
+
+    }
+
+    changeEmail(event) {
+        this.setState({email: event.target.value});
+    }
+
+    changePassword(event) {
+        this.setState({password: event.target.value});
+    }
+
+    changeConfirmPassword(event) {
+        this.setState({confirmPassword: event.target.value});
+    }
+
+    checkPassword() {
+        if(!this.isPasswordValid()) {
+            if(!this.state.password) {
+                this.props.dispatch(registerError("password is not empty"));
+            } else {
+                this.props.dispatch(registerError("passwords is not equal"));
+            }
+            setTimeout(() => {
+                this.props.dispatch(registerError());
+            }, 3 * 1000)
+        }
+    }
+
+    isPasswordValid() {
+        return this.state.password && this.state.password == this.state.confirmPassword;
+    }
+
+    doRegister(e) {
+        e.preventDefault();
+        if(!this.isPasswordValid()){
+            this.checkPassword();
+        } else {
+            this.props.dispatch(registerUser({
+                creds: {
+                    email: this.state.email,
+                    password: this.state.password
+                },
+                history: this.props.history
+            }))
+        }
+    }
+
     render() {
         return(
             <div class="wrapper row3">
