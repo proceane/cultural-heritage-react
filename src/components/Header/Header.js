@@ -1,8 +1,11 @@
 import React from 'react';
 import '../../assets/css/layout.css';
 import mainImage from '../../assets/images/main.jpg';
+import Login from "../../pages/login";
+import { logoutUser } from '../../actions/user';
 
 class Header extends React.Component {
+    loginState = Login.isAuthenticated(JSON.parse(localStorage.getItem("authenticated")));
     render() {
         return(
             <div className={"bgded"} style={{backgroundImage:"url(" + mainImage + ")"}}> 
