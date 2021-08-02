@@ -18,8 +18,8 @@ class Login extends React.Component {
         super(props);
 
         this.state = {
-            email: "",
-            password: ""
+            email: "test@mail.com",
+            password: "password"
         };
 
         this.doLogin = this.doLogin.bind(this);
@@ -48,21 +48,21 @@ class Login extends React.Component {
 
     render() {
         return(
-            <div class="wrapper row3">
-                <main class="hoc container clear"> 
-                    <div class="content"> 
+            <div className="wrapper row3">
+                <main className="hoc container clear"> 
+                    <div className="content"> 
                         <div>
-                            <p>계정이 없다면? <a href="join.html">회원가입</a></p> 
+                            <p>계정이 없다면? <a href="/register">회원가입</a></p> 
                         </div>
                         <div id="comments"> 
-                            <form action="#" method="post">
-                                <div class="one_half first">
+                            <form onSubmit={this.doLogin}>
+                                <div className="one_half first">
                                     <label for="email">이메일</label>
-                                    <input type="email" name="email" id="email" value="" size="22" required></input>
+                                    <input type="email" name="email" id="email" value={this.state.email} size="22" required onChange={this.changeEmail}></input>
                                 </div>
-                                <div class="one_half">
+                                <div className="one_half">
                                     <label for="pw_1">비밀번호</label>
-                                    <input type="password" name="pw_1" id="pw_1" value="" size="22" required></input>
+                                    <input type="password" name="pw_1" id="pw_1" value={this.state.password} size="22" required onChange={this.changePassword}></input>
                                 </div>
                                 <div>
                                     <input type="submit" name="submit" value="로그인"></input>
@@ -72,7 +72,7 @@ class Login extends React.Component {
                             </form>
                         </div>
                     </div>
-                    <div class="clear"></div>
+                    <div className="clear"></div>
                 </main>
             </div>
         )
