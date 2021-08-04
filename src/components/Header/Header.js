@@ -4,10 +4,26 @@ import mainImage from '../../assets/images/main.jpg';
 import Login from "../../pages/login";
 import { logoutUser } from '../../actions/user';
 import { Navbar, Nav, NavItem, NavLink } from "reactstrap";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 class Header extends React.Component {
-    loginState = Login.isAuthenticated(JSON.parse(localStorage.getItem("authenticated")));
+    static propTypes = {
+        dispatch: PropTypes.func.isRequired,
+    };
+
+    constructor(props) {
+        super(props);
+        this.doLogout = this.doLogout.bind(this);
+    }
+    
+    doLogout() {
+        this.props.dispatch(logoutUser());
+    }
+
     render() {
+        const loginState = Login.isAuthenticated(JSON.parse(localStorage.getItem("authenticated")));
         return(
             <div className={"bgded"} style={{backgroundImage:"url(" + mainImage + ")"}}> 
                 <div className={"wrapper row1"}>
@@ -27,11 +43,14 @@ class Header extends React.Component {
                                 <NavItem>
                                     <NavLink href="/review">리뷰</NavLink>
                                 </NavItem>
+                                {loginState && 
+                                    <NavItem>
+                                        <NavLink href="/mypage">마이페이지</NavLink>
+                                    </NavItem>
+                                }
                                 <NavItem>
-                                    <NavLink href="/mypage">마이페이지</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink href="/login">로그인</NavLink>
+                                    {!loginState && <NavLink href="/login">로그인</NavLink>}
+                                    {loginState && <NavLink href="#" onClick={this.doLogout}>로그아웃</NavLink>}
                                 </NavItem>
                             </Nav>
                         </Navbar>
@@ -51,5 +70,10 @@ class Header extends React.Component {
     }
 }
 
+function mapStateToProps(store) {
+    return {
 
-export default Header;
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(Header));
