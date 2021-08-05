@@ -21,7 +21,7 @@ class Layout extends React.Component {
     render() {
         return(
             <div>
-                <Header/>
+                <Header pageName={this.props.name}/>
                 <Switch>
                     <Route path="/" exact component={Main}/>
                     <Route path="/search" component={Search}/>

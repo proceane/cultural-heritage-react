@@ -70,7 +70,7 @@ class Header extends React.Component {
                 {window.location.pathname !== "/" && 
                     <div className={"overlay"}>
                         <div id="breadcrumb" className={"hoc clear"}> 
-                        <h6 className="heading">검색</h6>
+                        <h6 className="heading">{this.props.pageName}</h6>
                         </div>
                     </div>
                 }
