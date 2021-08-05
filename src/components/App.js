@@ -26,12 +26,12 @@ class App extends React.PureComponent {
             <BrowserRouter>
                 <Switch>
                     <Route path="/" exact component={LayoutComponent}/>
-                    <Route path="/search" component={LayoutComponent}/>
-                    <Route path="/review" component={LayoutComponent}/>
-                    <Route path="/login" component={LayoutComponent}/>
-                    <Route path="/register" component={LayoutComponent}/>
-                    <Route path="/detail/:ct/:lc/:cd" component={LayoutComponent}/>
-                    <PrivateRoute path="/mypage" dispatch={this.props.dispatch} component={LayoutComponent}/>
+                    <Route path="/search"><LayoutComponent name="검색"/></Route>
+                    <Route path="/review" ><LayoutComponent name="리뷰"/></Route>
+                    <Route path="/login" ><LayoutComponent name="로그인"/></Route>
+                    <Route path="/register" ><LayoutComponent name="회원가입"/></Route>
+                    <Route path="/detail/:ct/:lc/:cd"><LayoutComponent name="문화재명이 들어갑니다."/></Route>
+                    <PrivateRoute path="/mypage" dispatch={this.props.dispatch}><LayoutComponent name="마이페이지"/></PrivateRoute>
                     {/* <Route path="/mypage" component={LayoutComponent}/> */}
                     <Route component={ErrorPage}/>
                 </Switch> 
