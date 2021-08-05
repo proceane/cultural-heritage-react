@@ -20,6 +20,7 @@ class Header extends React.Component {
     
     doLogout() {
         this.props.dispatch(logoutUser());
+        this.props.history.push("/");
     }
 
     render() {
