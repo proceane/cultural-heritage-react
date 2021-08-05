@@ -26,46 +26,55 @@ class Header extends React.Component {
     render() {
         const loginState = Login.isAuthenticated(JSON.parse(localStorage.getItem("authenticated")));
         return(
-            <div className={"bgded"} style={{backgroundImage:"url(" + mainImage + ")"}}> 
+            <div className={"bgded"} style={{backgroundImage: window.location.pathname === "/" ? "url(" + mainImage + ")" : ""}}> 
                 <div className={"wrapper row1"}>
                     <header id="header" className={"hoc clear"}>
                         <div id="logo" className={"fl_left"}> 
-                        <h1><a href="/">아름누리</a></h1>
+                            <h1><NavLink href="/">아름누리</NavLink></h1>
                         </div>
                         
                         <Navbar id="mainav" className="fl_right">
                             <Nav className={"clear"}>
-                                <NavItem className={"active"}>
+                                <NavItem active={window.location.pathname === "/"}>
                                     <NavLink href="/">홈</NavLink>
                                 </NavItem>
-                                <NavItem>
+                                <NavItem active={window.location.pathname === "/search"}>
                                     <NavLink href="/search">검색</NavLink>
                                 </NavItem>
-                                <NavItem>
+                                <NavItem active={window.location.pathname === "/review"}>
                                     <NavLink href="/review">리뷰</NavLink>
                                 </NavItem>
                                 {loginState && 
-                                    <NavItem>
+                                    <NavItem active={window.location.pathname === "/mypage"}>
                                         <NavLink href="/mypage">마이페이지</NavLink>
                                     </NavItem>
                                 }
-                                <NavItem>
+                                <NavItem active={window.location.pathname === "/login"}>
                                     {!loginState && <NavLink href="/login">로그인</NavLink>}
                                     {loginState && <NavLink href="#" onClick={this.doLogout}>로그아웃</NavLink>}
                                 </NavItem>
                             </Nav>
                         </Navbar>
-                        {/* 메뉴에 따라 active */}
                     </header>
                 </div>
                 {/* 메뉴에 따라 동적 변경 */}
-                <div className={"overlay"}>
-                    <div id="pageintro" className={"hoc clear"}> 
-                        <article>
-                            <h3 className={"heading"}>내 손 안의 박물관, 아름누리</h3>
-                        </article>
+                {window.location.pathname === "/" && 
+                    <div className={"overlay"}>
+                        <div id="pageintro" className={"hoc clear"}> 
+                            <article>
+                                <h3 className={"heading"}>내 손 안의 박물관, 아름누리</h3>
+                            </article>
+                        </div>
                     </div>
-                </div>
+                }
+                {window.location.pathname !== "/" && 
+                    <div className={"overlay"}>
+                        <div id="breadcrumb" className={"hoc clear"}> 
+                        <h6 className="heading">검색</h6>
+                        </div>
+                    </div>
+                }
+                
             </div>
         )
     }
