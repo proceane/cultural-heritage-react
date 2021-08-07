@@ -1,3 +1,5 @@
+import { login } from "../context/authContext";
+
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
@@ -44,6 +46,7 @@ export function loginUser(creds){
         dispatch(receiveLogin());
 
         if (creds.email.length > 0 && creds.password.length > 0) {
+            var state = login(creds.email, creds.password);
             localStorage.setItem('authenticated', true);
         } else {
             dispatch(loginError('Something was wrong. Try again'));

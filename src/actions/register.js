@@ -1,3 +1,5 @@
+import { signUp } from "../context/authContext";
+
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
@@ -21,6 +23,7 @@ export function registerError(payload) {
 export function registerUser(payload) {
     return (dispatch) => {
         if(payload.creds.email.length > 0 && payload.creds.password.length > 0) {
+            signUp(payload.creds.email, payload.creds.password);
             payload.history.push('/login');
         } else {
             dispatch(registerError('Something was wrong. Try Again'));
