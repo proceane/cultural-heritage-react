@@ -1,7 +1,8 @@
-import * as firebase from "firebase";
-import "firebase/firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
-let firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyBSBdvvzT0xLv4OrXuxcBYGnC7aL0xev3Q",
     authDomain: "cultural-heritage-71c69.firebaseapp.com",
     databaseURL: "https://cultural-heritage-71c69-default-rtdb.firebaseio.com",
@@ -13,4 +14,8 @@ let firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
+
+export const auth = app.auth();
+
+export default app;
