@@ -1,9 +1,13 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { registerError, registerUser } from '../../actions/register'
 
 class Register extends React.Component {
+    static propTypes = {
+        dispatch: PropTypes.func.isRequired,
+    };
 
     constructor(props) {
         super(props);
@@ -15,6 +19,11 @@ class Register extends React.Component {
         };
 
         this.doRegister = this.doRegister.bind(this);
+        this.changeEmail = this.changeEmail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
+        this.changeConfirmPassword = this.changeConfirmPassword.bind(this);
+        this.checkPassword = this.checkPassword.bind(this);
+        this.isPasswordValid = this.isPasswordValid.bind(this);
 
     }
 
@@ -68,18 +77,18 @@ class Register extends React.Component {
                 <main class="hoc container clear"> 
                     <div class="content"> 
                         <div id="comments"> 
-                            <form action="#" method="post" onsubmit="return validation()">
+                            <form action="#" method="post" onSubmit={this.doRegister}>
                                 <div class="one_third first">
-                                    <label for="email">이메일 <span>*</span></label>
-                                    <input type="email" name="email" id="email" value="" size="22" required></input>
+                                    <label htmlFor="email">이메일 <span>*</span></label>
+                                    <input type="email" name="email" id="email" value={this.state.email} onChange={this.changeEmail} size="22" required></input>
                                 </div>
                                 <div class="one_third">
-                                    <label for="pw_1">비밀번호(숫자, 영문 포함 8 ~ 16자) <span>*</span></label>
-                                    <input type="password" name="pw_1" id="pw_1" value="" size="22" required></input>
+                                    <label htmlFor="pw_1">비밀번호(숫자, 영문 포함 8 ~ 16자) <span>*</span></label>
+                                    <input type="password" name="pw_1" id="pw_1" value={this.state.password} onChange={this.changePassword} size="22" required></input>
                                 </div>
                                 <div class="one_third">
-                                    <label for="pw_2">비밀번호 한 번 더 <span>*</span></label>
-                                    <input type="password" name="pw_2" id="pw_2" value="" size="22" required></input>
+                                    <label htmlFor="pw_2">비밀번호 한 번 더 <span>*</span></label>
+                                    <input type="password" name="pw_2" id="pw_2" value={this.state.confirmPassword} onChange={this.changeConfirmPassword} onBlur={this.checkPassword} size="22" required></input>
                                 </div>
                                 <div>
                                     <input type="submit" name="submit" value="회원가입"></input>
