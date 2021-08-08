@@ -4,14 +4,19 @@ import { Switch, Route, Redirect } from 'react-router';
 import { BrowserRouter } from 'react-router-dom'
 
 import LayoutComponent from '../components/Layout';
-import Login from '../pages/login'
-import { logoutUser } from '../actions/user';
 
 import ErrorPage from '../pages/error/ErrorPage';
 
+import { auth } from "../firebase";
+
 const PrivateRoute = ({dispatch, component, ...rest}) => {
-    if(!Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))) {
-        dispatch(logoutUser());
+    const sessionKey = "firebase:authUser:AIzaSyBSBdvvzT0xLv4OrXuxcBYGnC7aL0xev3Q:[DEFAULT]";
+    var uid = "";
+    auth.onAuthStateChanged((user) => {
+        uid = user.uid
+    });
+
+    if(JSON.parse(sessionStorage.getItem(sessionKey))["uid"] === uid) {
         return (<Redirect to="/login"/>)
     } else {
         return (
