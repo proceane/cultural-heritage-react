@@ -3,7 +3,7 @@ import PropsTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { auth } from "../../firebase";
+import { auth, SESSION } from "../../firebase";
 
 class Login extends React.Component {
     static propTypes = {
@@ -39,16 +39,19 @@ class Login extends React.Component {
     }
 
     doLogin(e) {
-        auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+        auth.setPersistence(SESSION)
         .then(() => {
-            localStorage.setItem('authenticated', true);
-            this.props.history.push("/");
-        }).catch((error) => {
-            if (error.code === "auth/wrong-password") {
-                this.setState({error: "잘못된 비밀번호입니다."});
-            } else if (error.code === "auth/user-not-found") {
-                this.setState({error: "가입하지않은 사용자입니다."});
-            }
+            auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then(() => {
+                localStorage.setItem('authenticated', true);
+                this.props.history.push("/");
+            }).catch((error) => {
+                if (error.code === "auth/wrong-password") {
+                    this.setState({error: "잘못된 비밀번호입니다."});
+                } else if (error.code === "auth/user-not-found") {
+                    this.setState({error: "가입하지않은 사용자입니다."});
+                }
+            });
         });
         e.preventDefault();
     }
