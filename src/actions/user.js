@@ -1,4 +1,4 @@
-import { login } from "../context/authContext";
+import { login, logout } from "../context/authContext";
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -35,6 +35,7 @@ export function receiveLogout() {
 export function logoutUser() {
     return (dispatch) => {
         dispatch(requestLogout());
+        logout();
         localStorage.removeItem('authenticated');
         dispatch(receiveLogout());
     };
