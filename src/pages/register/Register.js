@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { registerError, registerUser } from '../../actions/register'
+
+import { auth } from "../../firebase";
 
 class Register extends React.Component {
     static propTypes = {
@@ -15,7 +16,8 @@ class Register extends React.Component {
         this.state = {
             email: "",
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
+            error: null
         };
 
         this.doRegister = this.doRegister.bind(this);
@@ -41,14 +43,7 @@ class Register extends React.Component {
 
     checkPassword() {
         if(!this.isPasswordValid()) {
-            if(!this.state.password) {
-                this.props.dispatch(registerError("password is not empty"));
-            } else {
-                this.props.dispatch(registerError("passwords is not equal"));
-            }
-            setTimeout(() => {
-                this.props.dispatch(registerError());
-            }, 3 * 1000)
+            this.setState({error: "입력한 비밀번호와 확인용 비밀번호가 다릅니다."});
         }
     }
 
@@ -61,13 +56,13 @@ class Register extends React.Component {
         if(!this.isPasswordValid()){
             this.checkPassword();
         } else {
-            this.props.dispatch(registerUser({
-                creds: {
-                    email: this.state.email,
-                    password: this.state.password
-                },
-                history: this.props.history
-            }))
+            auth.createUserWithEmailAndPassword(this.state.email, this.state.password).then(() => {
+                this.props.history.push("/login");
+            }).catch((error) => {
+                if(error.code === "auth/email-already-in-use") {
+                    this.setState({error: "이미 등록된 이메일입니다."});
+                }
+            });
         }
     }
 
@@ -96,6 +91,7 @@ class Register extends React.Component {
                                     <input type="reset" name="reset" value="다시 입력"></input>
                                 </div>
                             </form>
+                            <p>{this.state.error}</p>
                         </div>
                     </div>
                     <div class="clear"></div>
