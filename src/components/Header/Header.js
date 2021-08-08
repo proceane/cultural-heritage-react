@@ -24,7 +24,7 @@ class Header extends React.Component {
     }
 
     render() {
-        const loginState = Login.isAuthenticated(JSON.parse(localStorage.getItem("authenticated")));
+        const loginState = Login.isAuthenticated(JSON.parse(JSON.stringify(localStorage.getItem("authenticated"))));
         return(
             <div className={"bgded"} style={{backgroundImage: window.location.pathname === "/" ? "url(" + mainImage + ")" : ""}}> 
                 <div className={"wrapper row1"}>
