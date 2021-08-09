@@ -29,13 +29,7 @@ const PrivateRoute = ({dispatch, component, ...rest}) => {
             <Route {...rest} render={props => (React.createElement(component, props))}/>
         )
     }
-    // if(JSON.parse(sessionStorage.getItem(sessionKey))["uid"] === uid) {
-    //     return (<Redirect to="/login"/>)
-    // } else {
-    //     return (
-    //         <Route {...rest} render={props => (React.createElement(component, props))}/>
-    //     )
-    // }
+
 };
 
 class App extends React.PureComponent {
