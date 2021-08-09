@@ -1,7 +1,59 @@
 import React from 'react';
+import { auth } from '../../../firebase';
 
 class UserInfo extends React.Component {
+    
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            email: "",
+            password: "",
+            confirmPassword: "",
+            error: null
+        };
+
+        this.doChangePassword = this.doChangePassword.bind(this);
+        this.checkPassword = this.checkPassword.bind(this);
+        this.isPasswordValid = this.isPasswordValid.bind(this);
+        this.changeEmail = this.changeEmail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
+        this.changeConfirmPassword = this.changeConfirmPassword.bind(this);
+    }
+
+    changeEmail(event) {
+        this.setState({email: event.target.value});
+    }
+
+    changePassword(event) {
+        this.setState({password: event.target.value});
+    }
+
+    changeConfirmPassword(event) {
+        this.setState({confirmPassword: event.target.value});
+    }
+
+    checkPassword() {
+        if(!this.isPasswordValid()) {
+            this.setState({error: "입력한 비밀번호와 확인용 비밀번호가 다릅니다."});
+        }
+    }
+
+    isPasswordValid() {
+        return this.state.password && this.state.password == this.state.confirmPassword;
+    }
+
+    doChangePassword(e) {
+        e.preventDefault();
+        auth.currentUser.updatePassword(this.state.password).then(() => {
+            this.props.history.push("/login");
+        }).catch((error) => {
+            this.setState({error: "비밀번호 변경중 오류가 발생하였습니다. 다시 시도해주세요 : " + error.message});
+        });
+    }
+
     render() {
+        const currentUser = auth.currentUser;
         return (
             <div className="wrapper row3">
                 <main className="hoc container clear"> 
@@ -19,18 +71,18 @@ class UserInfo extends React.Component {
                     <div className="content three_quarter"> 
                         <h1>회원정보</h1>
                         <div id="comments"> 
-                            <form action="#" method="post" onsubmit="return validation()">
+                            <form action="#" method="post" onSubmit={this.doChangePassword}>
                                 <div className="one_third first">
                                     <label for="email">이메일</label>
-                                    <input type="email" name="email" id="email" size="22" readonly value="aaa@mail.com"></input>
+                                    <input type="email" name="email" id="email" size="22" readonly value={currentUser.email} onChange={this.changeEmail}></input>
                                 </div>
                                 <div className="one_third">
                                     <label for="pw_1">비밀번호(숫자, 영문 포함 8 ~ 16자) <span>*</span></label>
-                                    <input type="password" name="pw_1" id="pw_1" value="" size="22" required></input>
+                                    <input type="password" name="pw_1" id="pw_1" size="22" required value={this.state.password} onChange={this.changePassword}></input>
                                 </div>
                                 <div className="one_third">
                                     <label for="pw_2">비밀번호 한 번 더 <span>*</span></label>
-                                    <input type="password" name="pw_2" id="pw_2" value="" size="22" required></input>
+                                    <input type="password" name="pw_2" id="pw_2" size="22" required value={this.state.confirmPassword} onChange={this.changeConfirmPassword}></input>
                                 </div>
                                 <div>
                                     <input type="submit" name="submit" value="수정하기"></input>
