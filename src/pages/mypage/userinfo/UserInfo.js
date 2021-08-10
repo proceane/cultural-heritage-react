@@ -20,7 +20,7 @@ class UserInfo extends React.Component {
         this.changePassword = this.changePassword.bind(this);
         this.changeConfirmPassword = this.changeConfirmPassword.bind(this);
     }
-
+    
     changeEmail(event) {
         this.setState({email: event.target.value});
     }
@@ -53,7 +53,11 @@ class UserInfo extends React.Component {
     }
 
     render() {
-        const currentUser = auth.currentUser;
+        const userEmail = () => {
+            auth.onAuthStateChanged((user) => {
+                return user.email;
+            });
+        };
         return (
             <div className="wrapper row3">
                 <main className="hoc container clear"> 
@@ -74,7 +78,7 @@ class UserInfo extends React.Component {
                             <form action="#" method="post" onSubmit={this.doChangePassword}>
                                 <div className="one_third first">
                                     <label for="email">이메일</label>
-                                    <input type="email" name="email" id="email" size="22" readonly value={currentUser.email} onChange={this.changeEmail}></input>
+                                    <input type="email" name="email" id="email" size="22" readonly value={userEmail} onChange={this.changeEmail}></input>
                                 </div>
                                 <div className="one_third">
                                     <label for="pw_1">비밀번호(숫자, 영문 포함 8 ~ 16자) <span>*</span></label>
@@ -90,6 +94,7 @@ class UserInfo extends React.Component {
                                     <input type="reset" name="reset" value="다시 입력"></input>
                                 </div>
                             </form>
+                            <p>{this.state.error}</p>
                         </div>
                     </div>
                     <div className="clear"></div>
