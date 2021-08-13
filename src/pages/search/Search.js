@@ -1,4 +1,5 @@
 import React from 'react';
+import data from "../../actions/data";
 
 class Search extends React.Component {
     active_category(category, id) {
