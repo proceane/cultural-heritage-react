@@ -1,4 +1,5 @@
 import React from 'react';
+import data from "../../actions/data";
 
 class Detail extends React.Component {
     render() {
