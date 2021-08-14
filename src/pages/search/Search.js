@@ -1,6 +1,6 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
-import data from "../../actions/data";
+import { getList } from "../../actions/data";
 
 class Search extends React.Component {
     static propTypes = {
@@ -13,10 +13,12 @@ class Search extends React.Component {
         this.state = {
             category: "",
             location: "",
+            result: {},
         };
 
         this.active_category = this.active_category.bind(this);
         this.active_location = this.active_location.bind(this);
+        this.getList = this.getList.bind(this);
     }
 
     active_category(category, id) {
@@ -28,7 +30,9 @@ class Search extends React.Component {
     }
 
     getList() {
-
+        const result = getList(this.state.location, this.state.category);
+        console.log(result);
+        this.setState({result: result});
     }
 
     render() {
@@ -83,7 +87,9 @@ class Search extends React.Component {
                             </div>
                         </div>
 
-                        <form method="get" onSubmit={this.getList}>
+                        <button className="search_button" onClick={this.getList}>검색</button>
+
+                        {/* <form method="get" onSubmit={this.getList}>
                             <div className="group btmspace-50">
                                 <div className="one_third first">&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                 <div className="one_third">
@@ -94,7 +100,7 @@ class Search extends React.Component {
                                 </div>
                                 <div className="one_third"></div>
                             </div>
-                        </form>
+                        </form> */}
 
                         <div id="comments">
                             <ul>
