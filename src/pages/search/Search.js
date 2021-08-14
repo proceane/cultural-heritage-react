@@ -1,11 +1,33 @@
 import React from 'react';
+import PropsTypes from 'prop-types';
 import data from "../../actions/data";
 
 class Search extends React.Component {
+    static propTypes = {
+        dispatch: PropsTypes.func.isRequired
+    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            category: "",
+            location: "",
+        };
+
+        this.active_category = this.active_category.bind(this);
+        this.active_location = this.active_location.bind(this);
+    }
+
     active_category(category, id) {
+        this.setState({category: id});
     }
 
     active_location(location, id) {
+        this.setState({location: id});
+    }
+
+    getList() {
 
     }
 
@@ -18,55 +40,55 @@ class Search extends React.Component {
                             <div className="one_half first">
                                 <h2>분류</h2>
                                 <div className="">
-                                    <div id="ct_11" className="category search_button" onClick={this.active_category('국보', 11)}>국보</div>
-                                    <div id="ct_12" className="category search_button" onClick={this.active_category('보물', 12)}>보물</div>
-                                    <div id="ct_13" className="category search_button" onClick={this.active_category('사적', 13)}>사적</div>
-                                    <div id="ct_14" className="category search_button" onClick={this.active_category('사적 및 명승', 14)}>사적 및 명승</div>
-                                    <div id="ct_15" className="category search_button" onClick={this.active_category('명승', 15)}>명승</div>
-                                    <div id="ct_16" className="category search_button" onClick={this.active_category('천연기념물', 16)}>천연기념물</div>
-                                    <div id="ct_17" className="category search_button" onClick={this.active_category('국가무형문화재', 17)}>국가무형문화재</div>
-                                    <div id="ct_18" className="category search_button" onClick={this.active_category('국가민속문화재', 18)}>국가민속문화재</div>
-                                    <div id="ct_21" className="category search_button" onClick={this.active_category('시도유형문화재', 21)}>시도유형문화재</div>
-                                    <div id="ct_22" className="category search_button" onClick={this.active_category('시도무형문화재', 22)}>시도무형문화재</div>
-                                    <div id="ct_23" className="category search_button" onClick={this.active_category('시도기념물', 23)}>시도기념물</div>
-                                    <div id="ct_24" className="category search_button" onClick={this.active_category('시도민속문화재', 24)}>시도민속문화재</div>
-                                    <div id="ct_31" className="category search_button" onClick={this.active_category('문화재자료', 31)}>문화재자료</div>
-                                    <div id="ct_79" className="category search_button" onClick={this.active_category('등록문화재', 79)}>등록문화재</div>
-                                    <div id="ct_80" className="category search_button" onClick={this.active_category('이북 5도 무형문화재', 80)}>이북 5도 무형문화재</div>
-                                    <div id="ct_99" className="category search_button" onClick={this.active_category('전체', 99)}>전체</div>
+                                    <div id="ct_11" className="category search_button" onClick={() => this.active_category('국보', 11)}>국보</div>
+                                    <div id="ct_12" className="category search_button" onClick={() => this.active_category('보물', 12)}>보물</div>
+                                    <div id="ct_13" className="category search_button" onClick={() => this.active_category('사적', 13)}>사적</div>
+                                    <div id="ct_14" className="category search_button" onClick={() => this.active_category('사적 및 명승', 14)}>사적 및 명승</div>
+                                    <div id="ct_15" className="category search_button" onClick={() => this.active_category('명승', 15)}>명승</div>
+                                    <div id="ct_16" className="category search_button" onClick={() => this.active_category('천연기념물', 16)}>천연기념물</div>
+                                    <div id="ct_17" className="category search_button" onClick={() => this.active_category('국가무형문화재', 17)}>국가무형문화재</div>
+                                    <div id="ct_18" className="category search_button" onClick={() => this.active_category('국가민속문화재', 18)}>국가민속문화재</div>
+                                    <div id="ct_21" className="category search_button" onClick={() => this.active_category('시도유형문화재', 21)}>시도유형문화재</div>
+                                    <div id="ct_22" className="category search_button" onClick={() => this.active_category('시도무형문화재', 22)}>시도무형문화재</div>
+                                    <div id="ct_23" className="category search_button" onClick={() => this.active_category('시도기념물', 23)}>시도기념물</div>
+                                    <div id="ct_24" className="category search_button" onClick={() => this.active_category('시도민속문화재', 24)}>시도민속문화재</div>
+                                    <div id="ct_31" className="category search_button" onClick={() => this.active_category('문화재자료', 31)}>문화재자료</div>
+                                    <div id="ct_79" className="category search_button" onClick={() => this.active_category('등록문화재', 79)}>등록문화재</div>
+                                    <div id="ct_80" className="category search_button" onClick={() => this.active_category('이북 5도 무형문화재', 80)}>이북 5도 무형문화재</div>
+                                    <div id="ct_99" className="category search_button" onClick={() => this.active_category('전체', 99)}>전체</div>
                                 </div>
                             </div>
                             <div className="one_half">
                                 <h2>지역</h2>
                                 <div className="">
-                                    <div id="lc_11" className="location search_button" onClick={this.active_location('서울', 11)}>서울</div>
-                                    <div id="lc_21" className="location search_button" onClick={this.active_location('부산', 21)}>부산</div>
-                                    <div id="lc_22" className="location search_button" onClick={this.active_location('대구', 22)}>대구</div>
-                                    <div id="lc_23" className="location search_button" onClick={this.active_location('인천', 23)}>인천</div>
-                                    <div id="lc_24" className="location search_button" onClick={this.active_location('광주', 24)}>광주</div>
-                                    <div id="lc_25" className="location search_button" onClick={this.active_location('대전', 25)}>대전</div>
-                                    <div id="lc_26" className="location search_button" onClick={this.active_location('울산', 26)}>울산</div>
-                                    <div id="lc_45" className="location search_button" onClick={this.active_location('세종', 45)}>세종</div>
-                                    <div id="lc_31" className="location search_button" onClick={this.active_location('경기', 31)}>경기</div>
-                                    <div id="lc_32" className="location search_button" onClick={this.active_location('강원', 32)}>강원</div>
-                                    <div id="lc_33" className="location search_button" onClick={this.active_location('충북', 33)}>충북</div>
-                                    <div id="lc_34" className="location search_button" onClick={this.active_location('충남', 34)}>충남</div>
-                                    <div id="lc_35" className="location search_button" onClick={this.active_location('전북', 35)}>전북</div>
-                                    <div id="lc_36" className="location search_button" onClick={this.active_location('전남', 36)}>전남</div>
-                                    <div id="lc_37" className="location search_button" onClick={this.active_location('경북', 37)}>경북</div>
-                                    <div id="lc_38" className="location search_button" onClick={this.active_location('경남', 38)}>경남</div>
-                                    <div id="lc_50" className="location search_button" onClick={this.active_location('제주', 50)}>제주</div>
-                                    <div id="lc_zz" className="location search_button" onClick={this.active_location('전국', 'zz')}>전국(위치 미상)</div>
+                                    <div id="lc_11" className="location search_button" onClick={() => this.active_location('서울', 11)}>서울</div>
+                                    <div id="lc_21" className="location search_button" onClick={() => this.active_location('부산', 21)}>부산</div>
+                                    <div id="lc_22" className="location search_button" onClick={() => this.active_location('대구', 22)}>대구</div>
+                                    <div id="lc_23" className="location search_button" onClick={() => this.active_location('인천', 23)}>인천</div>
+                                    <div id="lc_24" className="location search_button" onClick={() => this.active_location('광주', 24)}>광주</div>
+                                    <div id="lc_25" className="location search_button" onClick={() => this.active_location('대전', 25)}>대전</div>
+                                    <div id="lc_26" className="location search_button" onClick={() => this.active_location('울산', 26)}>울산</div>
+                                    <div id="lc_45" className="location search_button" onClick={() => this.active_location('세종', 45)}>세종</div>
+                                    <div id="lc_31" className="location search_button" onClick={() => this.active_location('경기', 31)}>경기</div>
+                                    <div id="lc_32" className="location search_button" onClick={() => this.active_location('강원', 32)}>강원</div>
+                                    <div id="lc_33" className="location search_button" onClick={() => this.active_location('충북', 33)}>충북</div>
+                                    <div id="lc_34" className="location search_button" onClick={() => this.active_location('충남', 34)}>충남</div>
+                                    <div id="lc_35" className="location search_button" onClick={() => this.active_location('전북', 35)}>전북</div>
+                                    <div id="lc_36" className="location search_button" onClick={() => this.active_location('전남', 36)}>전남</div>
+                                    <div id="lc_37" className="location search_button" onClick={() => this.active_location('경북', 37)}>경북</div>
+                                    <div id="lc_38" className="location search_button" onClick={() => this.active_location('경남', 38)}>경남</div>
+                                    <div id="lc_50" className="location search_button" onClick={() => this.active_location('제주', 50)}>제주</div>
+                                    <div id="lc_zz" className="location search_button" onClick={() => this.active_location('전국', 'zz')}>전국(위치 미상)</div>
                                 </div>
                             </div>
                         </div>
 
-                        <form method="get">
+                        <form method="get" onSubmit={this.getList}>
                             <div className="group btmspace-50">
                                 <div className="one_third first">&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                 <div className="one_third">
-                                    <input type="hidden" id="ct" name="ct" value=""></input>
-                                    <input type="hidden" id="lc" name="lc" value=""></input>
+                                    <input type="hidden" id="ct" name="ct" value={this.state.category}></input>
+                                    <input type="hidden" id="lc" name="lc" value={this.state.location}></input>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input type="submit" className="search_button" name="submit" value="검색"></input>
                                 </div>
