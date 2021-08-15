@@ -13,7 +13,7 @@ class Search extends React.Component {
         this.state = {
             category: "",
             location: "",
-            result: {},
+            result: null,
         };
 
         this.active_category = this.active_category.bind(this);
@@ -30,9 +30,7 @@ class Search extends React.Component {
     }
 
     getList() {
-        const result = getList(this.state.location, this.state.category);
-        console.log(result);
-        this.setState({result: result});
+        this.setState({result: getList(this.state.location, this.state.category)});
     }
 
     render() {
