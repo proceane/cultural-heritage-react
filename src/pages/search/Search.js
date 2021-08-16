@@ -13,7 +13,8 @@ class Search extends React.Component {
         this.state = {
             category: "",
             location: "",
-            result: null,
+            result: [],
+            current_key: "",
         };
 
         this.active_category = this.active_category.bind(this);
@@ -30,10 +31,37 @@ class Search extends React.Component {
     }
 
     getList() {
-        this.setState({result: getList(this.state.location, this.state.category)});
+        const data = getList(this.state.location, this.state.category, this.state.current_page).then((dt) => {
+            return dt;
+        });
+        this.setState({result: 
+            data.then((res) => {
+                return res;
+            })
+        });
     }
 
     render() {
+        const data = this.state.result;
+        console.log(data);
+        const list = Object.keys(data).map((dt) => {
+            console.log(dt);
+            return <li>
+                <article>
+                    <header>
+                        <figure className="avatar"><img className="search_image" src="http://www.cha.go.kr/unisearch/images/scenic_site/2020090216453002.jpg" alt=""></img></figure>
+                        <address>
+                        <a href="detail.html">서울 성북동 별서</a>
+                        </address>
+                        <div>명승 118호</div>
+                    </header>
+                    <div className="comcont">
+                        <p>1) 지정가치\n (역사성·학술성) 별서 조성 이전에도 경승지로 널리 이용되었으며, 고종 대의 내관인 황윤명이 조성하여 갑신정변 당시 명성황후가 피난처로 사용된 곳임. 또한 얼마 남지 않은 조선시대 민가정원으로서 보존ㆍ연구의 가치가 있음\n (경관성) 자연 계류와 지형, 암석 등이 잘 어우러져 공간구성 및 경관연출 등의 측면에서 한국전통 정원으로서의 미학이 살아있음\n\n2) 현황\n서울 지역에 드물게 남아있는 조선시대 정원으로서, 전통 정원 요소의 원형이 비교적 잘 남아있고 경관적으로도 보존할 가치가 있는 명승이다.\n\n시냇물을 따라 앞뜰, 안뜰, 바깥뜰로 나눌 수 있는데, 앞뜰에는 두 골짜기에서 흘러내린 물줄기가 하나로 모이는 쌍류동천(雙流洞天)이 있다. 안뜰을 감싸주는 용두가산(龍頭假山)에는 200~300년 되는 엄나무를 비롯하여 느티나무, 소나무, 참나무, 단풍나무, 다래나무, 말채나무 등이 울창한 숲을 이루고 있다. 안뜰의 영벽지(影碧池) 주위에는 인수위소지(引水爲小池), 장외가(檣外家), 청산일조(靑山壹條) 등의 글씨가 바위에 새겨져 있고 바깥뜰의 고엽약수 등과 함께 자연과 인공이 어우러진 경관을 보이고 있다.\n\n별서를 만들기 전부터 오랫동안 경승지로 이용되어왔던 곳이며, 조선 고종 때 내관이자 문인인 황윤명(黃允明, 1844∼1916)이 조성한 별서이다. 육교시사(六橋詩社) 시회(詩會)가 열리기도 했으며, 갑신정변 당시 명성황후의 피난처가 되었고, 의친왕 이강(李堈, 1877~1955)이 별궁으로 사용한 역사적 가치도 있다.</p>
+                    </div>
+                </article>
+            </li>
+        });
+
         return(
             <div className="wrapper row3">
                 <main className="hoc container clear"> 
