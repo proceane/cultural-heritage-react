@@ -3,9 +3,11 @@ import { database } from "../firebase";
 // 데이터 관련 로직
 
 // 리스트(페이징)
-export function getList(lc, ct) {
-  database.ref("data/" + lc + "/" + ct).once("value", (sn) => {
-    console.log(sn.val());
+export const getList = (lc, ct, current_page) => {
+  return database.ref("data/" + lc + "/" + ct)
+  .startAt(current_page)
+  .limitToLast(5)
+  .once("value").then((sn) => {
     return sn.val();
   });  
 };
