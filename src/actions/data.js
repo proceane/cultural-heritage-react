@@ -11,6 +11,8 @@ export function getList(lc, ct) {
 };
 
 // 상세
-export function getDetail() {
-
+export function getDetail(lc, ct, cd) {
+  database.ref("data/" + lc + "/" + ct + "/" + cd).once("value", (sn) => {
+    return sn.val();
+  });  
 }
