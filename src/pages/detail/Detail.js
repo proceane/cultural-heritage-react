@@ -1,8 +1,37 @@
 import React from 'react';
-import data from "../../actions/data";
+import { getDetail } from "../../actions/data";
+import PropsTypes from 'prop-types';
 
 class Detail extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data : [],
+        };
+
+        this.getData = this.getData.bind(this);
+    }
+
+    componentDidMount() {
+        const {params} = this.props.match;
+        this.getData(params.lc, params.ct, params.cd);
+    }
+
+    getData(lc, ct, cd) {
+        getDetail(lc, ct, cd)
+        .then((res) => {
+            if(res === null) {
+                this.setState({data: []});
+            } else {
+                this.setState({data : res});
+            }
+        });
+    }
+
     render() {
+        const data = this.state.data;
+        console.log(data);
         return(
             <div className="wrapper row3">
                 <main className="hoc container clear"> 
@@ -12,8 +41,8 @@ class Detail extends React.Component {
                         <div><img src="http://www.cha.go.kr/unisearch/images/national_treasure/2685619.jpg" title="숭례문(1882)"></img></div>
                     </div>
                     <br></br><br></br>
-                    <h1>국보 1호 서울 숭례문</h1>
-                    <p>조선시대 한양도성의 정문으로 남쪽에 있다고 해서 남대문이라고도 불렀다. 현재 서울에 남아 있는 목조 건물 중 가장 오래된 것으로 태조 5년(1396)에 짓기 시작하여 태조 7년(1398)에 완성하였다. 이 건물은 세종 30년(1448)에 고쳐 지은 것인데 1961∼1963년 해체·수리 때 성종 10년(1479)에도 큰 공사가 있었다는 사실이 밝혀졌다. 이후, 2008년 2월 10일 숭례문 방화 화재로 누각 2층 지붕이 붕괴되고 1층 지붕도 일부 소실되는 등 큰 피해를 입었으며, 5년 2개월에 걸친 복원공사 끝에 2013년 5월 4일 준공되어 일반에 공개되고 있다.\n 이 문은 돌을 높이 쌓아 만든 석축 가운데에 무지개 모양의 홍예문을 두고, 그 위에 앞면 5칸·옆면 2칸 크기로 지은 누각형 2층 건물이다. 지붕은 앞면에서 볼 때 사다리꼴 형태를 하고 있는데, 이러한 지붕을 우진각지붕이라 한다. 지붕 처마를 받치기 위해 기둥 위부분에 장식하여 짠 구조가 기둥 위뿐만 아니라 기둥 사이에도 있는 다포 양식으로, 그 형태가 곡이 심하지 않고 짜임도 건실해 조선 전기의 특징을 잘 보여주고 있다.\n 『지봉유설』의 기록에는 ‘숭례문’이라고 쓴 현판을 양녕대군이 썼다고 한다. 지어진 연대를 정확히 알 수 있는 서울 성곽 중에서 제일 오래된 목조 건축물이다.\nㅇ 숭례문 방화 화재(2008.2.10)\n - 2008년 숭례문 방화 사건(崇禮門放火事件)은 2008년 2월 10일 ~ 2월 11일 숭례문 건물이 방화로 타 무너진 사건이다. 화재는 2008년 2월 10일 오후 8시 40분 전후에 발생하여 다음날인 2008년 2월 11일 오전 0시 40분경 숭례문의 누각 2층 지붕이 붕괴하였고 이어 1층에도 불이 붙어 화재 5시간 만인 오전 1시 55분쯤 석축을 제외한 건물이 훼손되었다.</p>
+                    <h1>{data.ccmaname} {data.crltsnonm}호 {data.ccbamnm1}</h1>
+                    <p>{data.content}</p>
                     
                     <div className="scrollable">
                         <table>
