@@ -21,8 +21,7 @@ export async function getList(lc, ct, current_page) {
 };
 
 // 상세
-export function getDetail(lc, ct, cd) {
-  database.ref("data/" + lc + "/" + ct + "/" + cd).once("value", (sn) => {
-    return sn.val();
-  });  
+export async function getDetail(lc, ct, cd) {
+  const sn = await database.ref("data/" + lc + "/" + ct + "/" + cd).once("value");
+  return sn.val();
 }
