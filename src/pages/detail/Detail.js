@@ -31,7 +31,6 @@ class Detail extends React.Component {
 
     render() {
         const data = this.state.data;
-        console.log(data);
         return(
             <div className="wrapper row3">
                 <main className="hoc container clear"> 
@@ -49,24 +48,24 @@ class Detail extends React.Component {
                         <tbody>
                             <tr>
                             <td>시대</td>
-                            <td>조선 태조 7년(1398)</td>
+                            <td>{data.cccename}</td>
                             </tr>
                             {/* <!-- g-b-m-s 순서 --> */}
                             <tr>
                             <td>분류</td>
-                            <td>유적건조물 / 정치국방 / 성 / 성곽시설</td>
+                            <td>{data.gcodename} / {data.bcodename} / {data.mcodename} / {data.scodename}</td>
                             </tr>
                             <tr>
                             <td>지정(등록일)</td>
-                            <td>1962.12.20</td>
+                            <td>{data.ccbaasdt}1962.12.20</td>
                             </tr>
                             <tr>
                             <td>수량</td>
-                            <td>1동</td>
+                            <td>{data.ccbaquan}</td>
                             </tr>
                             <tr>
                             <td>위치</td>
-                            <td>서울 중구 세종대로 40 (남대문로4가)</td>
+                            <td>{data.ccbalcad}</td>
                             </tr>
                         </tbody>
                         </table>
