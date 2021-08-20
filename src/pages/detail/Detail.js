@@ -1,6 +1,7 @@
 import React from 'react';
 import { getDetail } from "../../actions/data";
-import PropsTypes from 'prop-types';
+import {Carousel} from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 class Detail extends React.Component {
     constructor(props) {
@@ -8,6 +9,7 @@ class Detail extends React.Component {
 
         this.state = {
             data : [],
+            imageList: [],
         };
 
         this.getData = this.getData.bind(this);
@@ -25,20 +27,26 @@ class Detail extends React.Component {
                 this.setState({data: []});
             } else {
                 this.setState({data : res});
+                this.setState({imageList: res.image});
             }
         });
     }
 
     render() {
         const data = this.state.data;
+        const imageList = this.state.imageList;
+        const image = Object.keys(imageList).map((item) => {
+            return <div>
+                <img src={imageList[item].imageurl} alt={imageList[item].ccimdesc}></img>
+            </div>
+        });
         return(
             <div className="wrapper row3">
                 <main className="hoc container clear"> 
                     <div className="content three_quarter first"> 
-                    <div className="image_slider">
-                        <div><img src="http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg" title="봄 숭례문(2015)"></img></div>
-                        <div><img src="http://www.cha.go.kr/unisearch/images/national_treasure/2685619.jpg" title="숭례문(1882)"></img></div>
-                    </div>
+                    <Carousel>
+                        {image}
+                    </Carousel>
                     <br></br><br></br>
                     <h1>{data.ccmaname} {data.crltsnonm}호 {data.ccbamnm1}</h1>
                     <p>{data.content}</p>
