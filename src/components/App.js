@@ -42,7 +42,7 @@ class App extends React.PureComponent {
                     <Route path="/review" ><LayoutComponent name="리뷰"/></Route>
                     <Route path="/login" ><LayoutComponent name="로그인"/></Route>
                     <Route path="/register" ><LayoutComponent name="회원가입"/></Route>
-                    <Route path="/detail/:ct/:lc/:cd"><LayoutComponent name="문화재명이 들어갑니다."/></Route>
+                    <Route path="/detail/:ct/:lc/:cd"><LayoutComponent name={null}/></Route>
                     <PrivateRoute path="/mypage" dispatch={this.props.dispatch}><LayoutComponent name="마이페이지"/></PrivateRoute>
                     {/* <Route path="/mypage" component={LayoutComponent}/> */}
                     <Route component={ErrorPage}/>
