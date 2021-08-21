@@ -17,11 +17,38 @@ import Like from '../../pages/mypage/like'
 
 import Detail from '../../pages/detail'
 
+import { getDetailName } from '../../actions/data';
+
 class Layout extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            headerName: "",
+        };
+
+        this.setHeaderName = this.setHeaderName.bind(this);
+    }
+
+    componentDidMount() {
+        this.setHeaderName();
+    }
+
+    setHeaderName() {
+        if(this.props.name == null) {
+            getDetailName(this.props.match.params.lc, this.props.match.params.ct, this.props.match.params.cd).then((res) => {
+                this.setState({headerName: res});
+            });
+        } else {
+            this.setState({headerName: this.props.name});
+        }
+    }
+
     render() {
         return(
             <div>
-                <Header pageName={this.props.name}/>
+                <Header pageName={this.state.headerName}/>
                 <Switch>
                     <Route path="/" exact component={Main}/>
                     <Route path="/search" component={Search}/>
