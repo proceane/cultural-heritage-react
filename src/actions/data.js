@@ -30,3 +30,16 @@ export async function getDetailName(lc, ct, cd) {
   const sn = await database.ref("data/" + lc + "/" + ct + "/" + cd + "/ccbamnm1").once("value");
   return sn.val();
 }
+
+// 댓글 등록
+export function setComment(lc, ct, cd, email, comment) {
+  const commentData = {
+    "lc": lc,
+    "ct": ct,
+    "cd": cd,
+    "email": email,
+    "comment": comment,
+    "date": new Date(),
+  };
+  database.ref("data/comment").set(commentData);
+}

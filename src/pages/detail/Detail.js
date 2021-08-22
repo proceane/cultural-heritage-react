@@ -1,5 +1,5 @@
 import React from 'react';
-import { getDetail } from "../../actions/data";
+import { getDetail, setComment } from "../../actions/data";
 import {Carousel} from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
@@ -30,6 +30,10 @@ class Detail extends React.Component {
                 this.setState({imageList: res.image});
             }
         });
+    }
+
+    setComment(lc, ct, cd, email, comment) {
+        
     }
 
     render() {
