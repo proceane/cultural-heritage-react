@@ -12,10 +12,9 @@ import { database } from "../firebase";
 //   });  
 // };
 
-export async function getList(lc, ct, current_page) {
+export async function getList(lc, ct) {
   const sn = await database.ref("data/" + lc + "/" + ct)
-  .startAt(current_page)
-  .limitToLast(5)
+  .limitToFirst(10)
   .once("value");
   return sn.val();
 };
@@ -28,5 +27,21 @@ export async function getDetail(lc, ct, cd) {
 
 export async function getDetailName(lc, ct, cd) {
   const sn = await database.ref("data/" + lc + "/" + ct + "/" + cd + "/ccbamnm1").once("value");
+  return sn.val();
+}
+
+// 댓글 등록
+export function setComment(lc, ct, cd, email, comment) {
+  const commentData = {
+    "email": email,
+    "comment": comment,
+    "date": new Date(),
+  };
+  database.ref("data/comment/" + lc + "/" + ct + "/" + cd).set(commentData);
+}
+
+// 댓글 조회
+export async function getDetailComment(lc, ct, cd) {
+  const sn = await database.ref("data/comment/" + lc + "/" + ct + "/" + cd).once("value");
   return sn.val();
 }

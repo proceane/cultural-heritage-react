@@ -1,5 +1,5 @@
 import React from 'react';
-import { getDetail } from "../../actions/data";
+import { getDetail, setComment, getDetailComment } from "../../actions/data";
 import {Carousel} from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
@@ -10,9 +10,11 @@ class Detail extends React.Component {
         this.state = {
             data : [],
             imageList: [],
+            commentList: [],
         };
 
         this.getData = this.getData.bind(this);
+        this.getCommentData = this.getCommentData.bind(this);
     }
 
     componentDidMount() {
@@ -32,6 +34,21 @@ class Detail extends React.Component {
         });
     }
 
+    getCommentData(lc, ct, cd) {
+        getDetailComment(lc, ct, cd)
+        .then((res) => {
+            if(res === null) {
+                this.setState({commentList: []});
+            } else {
+                this.setState({commentList : res});
+            }
+        });
+    }
+
+    setComment(lc, ct, cd, email, comment) {
+        
+    }
+
     render() {
         const data = this.state.data;
         const imageList = this.state.imageList;
@@ -39,6 +56,20 @@ class Detail extends React.Component {
             return <div>
                 <img src={imageList[item].imageurl} alt={imageList[item].ccimdesc}></img>
             </div>
+        });
+        
+        const comment = this.state.commentList;
+        const commentList = Object.keys(comment).map((item) => {
+            return <li>
+                        <article>
+                            <header>
+                                <time datetime="2045-04-06T08:15+00:00">{comment[item].date}</time>
+                            </header>
+                            <div className="comcont">
+                                <p>{comment[item].comment}</p>
+                            </div>
+                        </article>
+                    </li>
         });
         return(
             <div className="wrapper row3">
@@ -103,7 +134,8 @@ class Detail extends React.Component {
                             </div>
                         </form>
                         <ul>
-                        <li>
+                            {commentList}
+                        {/* <li>
                             <article>
                                 <header>
                                     <time datetime="2045-04-06T08:15+00:00">2021.07.19 17:40</time>
@@ -152,7 +184,7 @@ class Detail extends React.Component {
                                     <p>완전 멋있어요!</p>
                                 </div>
                             </article>
-                        </li>
+                        </li> */}
                         </ul>
                     </div>
                     <nav className="pagination">
