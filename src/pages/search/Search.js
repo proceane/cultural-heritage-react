@@ -14,7 +14,6 @@ class Search extends React.Component {
             category: "",
             location: "",
             result: [],
-            current_key: "",
             category_active: "",
             location_active: "",
         };
@@ -35,7 +34,7 @@ class Search extends React.Component {
     }
 
     getList() {
-        getList(this.state.location, this.state.category, this.state.current_page)
+        getList(this.state.location, this.state.category)
         .then((res) => {
             if(res === null) {
                 this.setState({result: []});
