@@ -11,6 +11,11 @@ class Detail extends React.Component {
             data : [],
             imageList: [],
             commentList: [],
+            lc: props.match.params.lc,
+            ct: props.match.params.ct,
+            cd: props.match.params.cd,
+            email: "",
+            comment: "",
         };
 
         this.getData = this.getData.bind(this);
@@ -45,8 +50,8 @@ class Detail extends React.Component {
         });
     }
 
-    setComment(lc, ct, cd, email, comment) {
-        
+    setComment() {
+        setComment(this.state.lc, this.state.ct, this.state.cd, this.state.email, this.state.comment);
     }
 
     render() {
