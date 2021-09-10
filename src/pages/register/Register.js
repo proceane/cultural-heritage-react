@@ -26,6 +26,7 @@ class Register extends React.Component {
         this.changeConfirmPassword = this.changeConfirmPassword.bind(this);
         this.checkPassword = this.checkPassword.bind(this);
         this.isPasswordValid = this.isPasswordValid.bind(this);
+        this.reset = this.reset.bind(this);
 
     }
 
@@ -66,6 +67,12 @@ class Register extends React.Component {
         }
     }
 
+    reset() {
+        this.setState({email: ""});
+        this.setState({password: ""});
+        this.setState({confirmPassword: ""});
+    }
+ 
     render() {
         return(
             <div class="wrapper row3">
@@ -88,7 +95,7 @@ class Register extends React.Component {
                                 <div>
                                     <input type="submit" name="submit" value="회원가입"></input>
                                     &nbsp;
-                                    <input type="reset" name="reset" value="다시 입력"></input>
+                                    <input type="reset" name="reset" value="다시 입력" onClick={this.reset}></input>
                                 </div>
                             </form>
                             <p>{this.state.error}</p>
