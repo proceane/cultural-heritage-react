@@ -27,6 +27,7 @@ class Login extends React.Component {
         this.changeEmail = this.changeEmail.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.signUp = this.signUp.bind(this);
+        this.reset = this.reset.bind(this);
 
     }
 
@@ -60,6 +61,11 @@ class Login extends React.Component {
         this.props.history.push("/register");
     }
 
+    reset() {
+        this.setState({email: ""});
+        this.setState({password: ""});
+    }
+
     render() {
         return(
             <div className="wrapper row3">
@@ -81,7 +87,7 @@ class Login extends React.Component {
                                 <div>
                                     <input type="submit" name="submit" value="로그인"></input>
                                     &nbsp;
-                                    <input type="reset" name="reset" value="다시 입력"></input>
+                                    <input type="reset" name="reset" value="다시 입력" onClick={this.reset}></input>
                                 </div>
                             </form>
                             <p>{this.state.error}</p>
