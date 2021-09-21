@@ -43,19 +43,19 @@ class Main extends React.Component {
                         <ul className="nospace group">
                             <li className="one_third">
                                 <figure>
-                                    <a className="imgover" href="detail.html"><img className="fix_image_348x261" src="http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg" alt="봄 숭례문(2015)"></img></a>
+                                    <a className="imgover" href="/detail/11/11/00010000"><img className="fix_image_348x261" src="http://www.cha.go.kr/unisearch/images/national_treasure/2685609.jpg" alt="봄 숭례문(2015)"></img></a>
                                     <figcaption><strong>국보 1호</strong> 서울 숭례문</figcaption>
                                 </figure>
                             </li>
                             <li className="one_third">
                                 <figure>
-                                    <a className="imgover" href="detail.html"><img className="fix_image_348x261" src="http://www.cha.go.kr/unisearch/images/national_treasure/1611450.jpg" alt="서울 원각사지 십층석탑 전경"></img></a>
+                                    <a className="imgover" href="/detail/11/11/00020000"><img className="fix_image_348x261" src="http://www.cha.go.kr/unisearch/images/national_treasure/1611450.jpg" alt="서울 원각사지 십층석탑 전경"></img></a>
                                     <figcaption><strong>국보 2호</strong> 서울 원각사지 십층석탑</figcaption>
                                 </figure>
                                 </li>
                             <li className="one_third">
                                 <figure>
-                                    <a className="imgover" href="detail.html"><img className="fix_image_348x261" src="http://www.cha.go.kr/unisearch/images/national_treasure/1611462.jpg" alt="서울 북한산 신라 진흥왕 순수비"></img></a>
+                                    <a className="imgover" href="/detail/11/11/00030000"><img className="fix_image_348x261" src="http://www.cha.go.kr/unisearch/images/national_treasure/1611462.jpg" alt="서울 북한산 신라 진흥왕 순수비"></img></a>
                                     <figcaption><strong>국보 3호</strong> 서울 북한산 신라 진흥왕 순수비</figcaption>
                                 </figure>
                             </li>
@@ -69,22 +69,22 @@ class Main extends React.Component {
                         </div>
                         <ul className="nospace group team">
                             <li className="one_quarter first">
-                            <figure><a className="imgover" href="detail.html"><img className="fix_image_249x249" src="http://www.cha.go.kr/unisearch/images/treasure/1613143.jpg" alt="서울 흥인지문 정면"></img></a>
+                            <figure><a className="imgover" href="/detail/11/12/00010000"><img className="fix_image_249x249" src="http://www.cha.go.kr/unisearch/images/treasure/1613143.jpg" alt="서울 흥인지문 정면"></img></a>
                                 <figcaption><strong>보물 1호</strong> <em>서울 흥인지문</em></figcaption>
                             </figure>
                             </li>
                             <li className="one_quarter">
-                            <figure><a className="imgover" href="detail.html"><img className="fix_image_249x249" src="http://www.cha.go.kr/unisearch/images/treasure/1613150.jpg" alt="옛 보신각 동종"></img></a>
+                            <figure><a className="imgover" href="/detail/11/12/00020000"><img className="fix_image_249x249" src="http://www.cha.go.kr/unisearch/images/treasure/1613150.jpg" alt="옛 보신각 동종"></img></a>
                                 <figcaption><strong>보물 2호</strong> <em>옛 보신각 동종</em></figcaption>
                             </figure>
                             </li>
                             <li className="one_quarter">
-                            <figure><a className="imgover" href="detail.html"><img className="fix_image_249x249" src="http://www.cha.go.kr/unisearch/images/treasure/1613155.jpg" alt="서울 원각사지 대원각사비"></img></a>
+                            <figure><a className="imgover" href="/detail/11/12/00030000"><img className="fix_image_249x249" src="http://www.cha.go.kr/unisearch/images/treasure/1613155.jpg" alt="서울 원각사지 대원각사비"></img></a>
                                 <figcaption><strong>보물 3호</strong> <em>서울 원각사지 대원각사비</em></figcaption>
                             </figure>
                             </li>
                             <li className="one_quarter">
-                            <figure><a className="imgover" href="detail.html"><img className="fix_image_249x249" src="http://www.cha.go.kr/unisearch/images/treasure/1615580.jpg" alt="안양 중초사지 당간지주"></img></a>
+                            <figure><a className="imgover" href="/detail/31/12/00040000"><img className="fix_image_249x249" src="http://www.cha.go.kr/unisearch/images/treasure/1615580.jpg" alt="안양 중초사지 당간지주"></img></a>
                                 <figcaption><strong>보물 4호</strong> <em>안양 중초사지 당간지주</em></figcaption>
                             </figure>
                             </li>
