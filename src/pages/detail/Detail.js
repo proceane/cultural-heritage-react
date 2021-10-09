@@ -20,6 +20,8 @@ class Detail extends React.Component {
 
         this.getData = this.getData.bind(this);
         this.getCommentData = this.getCommentData.bind(this);
+        this.setComment = this.setComment.bind(this);
+        this.changeComment = this.changeComment.bind(this);
     }
 
     componentDidMount() {
@@ -52,6 +54,10 @@ class Detail extends React.Component {
 
     setComment() {
         setComment(this.state.lc, this.state.ct, this.state.cd, this.state.email, this.state.comment);
+    }
+
+    changeComment(event) {
+        this.setState({comment : event.target.value})
     }
 
     render() {
@@ -121,7 +127,7 @@ class Detail extends React.Component {
                     
                     <div id="comments">
                         <h2>댓글</h2>
-                        <form action="#" method="post">
+                        <form onSubmit={this.setComment}>
                             {/* <!-- 비로그인은 안보임 로그인시 email input에 로그인된 메일 표시 --> */}
                             <div className="one_third first">
                                 <label for="email">email</label>
@@ -129,7 +135,7 @@ class Detail extends React.Component {
                             </div>
                             <div className="block clear">
                                 <label for="comment">Your Comment</label>
-                                <textarea name="comment" id="comment" cols="25" rows="10" placeholder="로그인 하셔야 댓글을 남길 수 있습니다."></textarea>
+                                <textarea name="comment" id="comment" cols="25" rows="10" placeholder="로그인 하셔야 댓글을 남길 수 있습니다." onChange={this.changeComment}></textarea>
                             </div>
                             {/* <!-- 비로그인 버튼 안보임 --> */}
                             <div>
