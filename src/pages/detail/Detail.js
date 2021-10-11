@@ -1,5 +1,6 @@
 import React from 'react';
 import { getDetail, setComment, getDetailComment } from "../../actions/data";
+import Login from "../../pages/login";
 import {Carousel} from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
@@ -82,6 +83,9 @@ class Detail extends React.Component {
                         </article>
                     </li>
         });
+
+        const loginState = Login.isAuthenticated(JSON.parse(JSON.stringify(localStorage.getItem("authenticated"))));
+
         return(
             <div className="wrapper row3">
                 <main className="hoc container clear"> 
@@ -95,29 +99,29 @@ class Detail extends React.Component {
                     
                     <div className="scrollable">
                         <table>
-                        <tbody>
-                            <tr>
-                            <td>시대</td>
-                            <td>{data.cccename}</td>
-                            </tr>
-                            {/* <!-- g-b-m-s 순서 --> */}
-                            <tr>
-                            <td>분류</td>
-                            <td>{data.gcodename} / {data.bcodename} / {data.mcodename} / {data.scodename}</td>
-                            </tr>
-                            <tr>
-                            <td>지정(등록일)</td>
-                            <td>{data.ccbaasdt}1962.12.20</td>
-                            </tr>
-                            <tr>
-                            <td>수량</td>
-                            <td>{data.ccbaquan}</td>
-                            </tr>
-                            <tr>
-                            <td>위치</td>
-                            <td>{data.ccbalcad}</td>
-                            </tr>
-                        </tbody>
+                            <tbody>
+                                <tr>
+                                    <td>시대</td>
+                                    <td>{data.cccename}</td>
+                                </tr>
+                                {/* <!-- g-b-m-s 순서 --> */}
+                                <tr>
+                                    <td>분류</td>
+                                    <td>{data.gcodename} / {data.bcodename} / {data.mcodename} / {data.scodename}</td>
+                                </tr>
+                                <tr>
+                                    <td>지정(등록일)</td>
+                                    <td>{data.ccbaasdt}1962.12.20</td>
+                                </tr>
+                                <tr>
+                                    <td>수량</td>
+                                    <td>{data.ccbaquan}</td>
+                                </tr>
+                                <tr>
+                                    <td>위치</td>
+                                    <td>{data.ccbalcad}</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div>
@@ -129,20 +133,33 @@ class Detail extends React.Component {
                         <h2>댓글</h2>
                         <form onSubmit={this.setComment}>
                             {/* <!-- 비로그인은 안보임 로그인시 email input에 로그인된 메일 표시 --> */}
-                            <div className="one_third first">
-                                <label for="email">email</label>
-                                <input type="email" name="email" id="email" value="" size="22" readonly></input>
-                            </div>
-                            <div className="block clear">
-                                <label for="comment">Your Comment</label>
-                                <textarea name="comment" id="comment" cols="25" rows="10" placeholder="로그인 하셔야 댓글을 남길 수 있습니다." onChange={this.changeComment}></textarea>
-                            </div>
+                            {loginState && 
+                                <div className="one_third first">
+                                    <label for="email">email</label>
+                                    <input type="email" name="email" id="email" value={this.email} size="22" readonly></input>
+                                </div>
+                            }
+                            {loginState && 
+                                <div className="block clear">
+                                    <label for="comment">Your Comment</label>
+                                    <textarea name="comment" id="comment" cols="25" rows="10" placeholder="" onChange={this.changeComment}></textarea>
+                                </div>
+                            }
+                            {!loginState && 
+                                <div className="block clear">
+                                    <label for="comment">Your Comment</label>
+                                    <textarea name="comment" id="comment" cols="25" rows="10" placeholder="로그인 하셔야 댓글을 남길 수 있습니다." readOnly></textarea>
+                                </div>
+                            }
+
                             {/* <!-- 비로그인 버튼 안보임 --> */}
-                            <div>
-                                <input type="submit" name="submit" value="Submit Form"></input>
-                                &nbsp;
-                                <input type="reset" name="reset" value="Reset Form"></input>
-                            </div>
+                            {loginState && 
+                                <div>
+                                    <input type="submit" name="submit" value="Submit Form"></input>
+                                    &nbsp;
+                                    <input type="reset" name="reset" value="Reset Form"></input>
+                                </div>
+                            }
                         </form>
                         <ul>
                             {commentList}
