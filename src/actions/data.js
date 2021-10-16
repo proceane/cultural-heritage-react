@@ -31,13 +31,19 @@ export async function getDetailName(lc, ct, cd) {
 }
 
 // 댓글 등록
-export function setComment(lc, ct, cd, email, comment) {
+export async function setComment(lc, ct, cd, email, comment) {
+  const len = 0;
+  const sn = await database.ref("data/comment/" + lc + "/" + ct + "/" + cd).once('value');
+
+  len = sn.val().count + 1;
+
   const commentData = {
     "email": email,
     "comment": comment,
-    "date": new Date(),
+    "date": new Date().toLocaleString(),
   };
-  database.ref("data/comment/" + lc + "/" + ct + "/" + cd).set(commentData);
+  await database.ref("data/comment/" + lc + "/" + ct + "/" + cd + "/" + len).set(commentData);
+  
 }
 
 // 댓글 조회
