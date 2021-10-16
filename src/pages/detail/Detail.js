@@ -28,6 +28,7 @@ class Detail extends React.Component {
     componentDidMount() {
         const {params} = this.props.match;
         this.getData(params.lc, params.ct, params.cd);
+        this.getCommentData(params.lc, params.ct, params.cd);
     }
 
     getData(lc, ct, cd) {
