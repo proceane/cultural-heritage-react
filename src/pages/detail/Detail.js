@@ -3,6 +3,7 @@ import { getDetail, setComment, getDetailComment } from "../../actions/data";
 import Login from "../../pages/login";
 import {Carousel} from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { auth } from '../../firebase';
 
 class Detail extends React.Component {
     constructor(props) {
@@ -29,6 +30,12 @@ class Detail extends React.Component {
         const {params} = this.props.match;
         this.getData(params.lc, params.ct, params.cd);
         this.getCommentData(params.lc, params.ct, params.cd);
+
+        const user = auth.currentUser;
+        if (user !== null) {
+            this.state.email = user.email;
+        }
+        
     }
 
     getData(lc, ct, cd) {
@@ -76,7 +83,7 @@ class Detail extends React.Component {
             return <li>
                         <article>
                             <header>
-                                <time datetime="2045-04-06T08:15+00:00">{comment[item].date}</time>
+                                <time dateTime="2045-04-06T08:15+00:00">{comment[item].date}</time>
                             </header>
                             <div className="comcont">
                                 <p>{comment[item].comment}</p>
@@ -136,19 +143,19 @@ class Detail extends React.Component {
                             {/* <!-- 비로그인은 안보임 로그인시 email input에 로그인된 메일 표시 --> */}
                             {loginState && 
                                 <div className="one_third first">
-                                    <label for="email">email</label>
-                                    <input type="email" name="email" id="email" value={this.email} size="22" readonly></input>
+                                    <label htmlFor="email">email</label>
+                                    <input type="email" name="email" id="email" value={this.state.email} size="22" readOnly></input>
                                 </div>
                             }
                             {loginState && 
                                 <div className="block clear">
-                                    <label for="comment">Your Comment</label>
+                                    <label htmlFor="comment">Your Comment</label>
                                     <textarea name="comment" id="comment" cols="25" rows="10" placeholder="" onChange={this.changeComment}></textarea>
                                 </div>
                             }
                             {!loginState && 
                                 <div className="block clear">
-                                    <label for="comment">Your Comment</label>
+                                    <label htmlFor="comment">Your Comment</label>
                                     <textarea name="comment" id="comment" cols="25" rows="10" placeholder="로그인 하셔야 댓글을 남길 수 있습니다." readOnly></textarea>
                                 </div>
                             }
